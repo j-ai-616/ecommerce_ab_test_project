@@ -1,6 +1,8 @@
 # E-commerce Behavioral Analytics & A/B Test Simulation
 #### Identifying funnel drop-offs and improving purchase conversion through experiment design
 
+(*Work In Progress)
+
 ## 1. Project Overview
 
 This project analyzes large-scale e-commerce behavioral log data to identify conversion bottlenecks and design an A/B test strategy for improving purchase conversion.
