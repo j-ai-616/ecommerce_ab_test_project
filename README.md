@@ -1,152 +1,213 @@
-# E-commerce Conversion A/B Test Project
+# E-commerce Behavioral Analytics & A/B Test Simulation
+#### Identifying funnel drop-offs and improving purchase conversion through experiment design
 
-## Overview
+## 1. Project Overview
 
-This project demonstrates how experimental design and data-driven decision making can be applied in an e-commerce environment.
+This project analyzes large-scale e-commerce behavioral log data to identify conversion bottlenecks and design an A/B test strategy for improving purchase conversion.
 
-Using customer behavior data, the project simulates an A/B testing scenario to compare the performance of two user groups and evaluate whether a product, UI, or marketing change leads to measurable business improvement.
+Rather than stopping at descriptive analytics, this project follows a practical business workflow:
 
-The objective is to determine whether the new variation (Group B) delivers statistically meaningful uplift compared with the control group (Group A).
+> raw data audit → funnel analysis → item/category analysis → A/B test design → statistical simulation → business recommendation
 
----
-
-## Business Question
-
-Can a product or experience change improve customer conversion performance?
-
-Examples include:
-
-- Purchase conversion rate improvement
-- Add-to-cart rate increase
-- Checkout completion uplift
-- Revenue per visitor optimization
-- User engagement improvement
+The objective is to transform behavioral data into actionable product and growth strategies.
 
 ---
 
-## Project Goals
+## 2. Raw Data Summary
 
-- Design a realistic A/B testing framework
-- Compare key performance metrics between two groups
-- Evaluate uplift and statistical significance
-- Provide clear business recommendations based on results
-- Visualize findings for decision makers
+Initial raw data audit results:
 
----
+| Data | Summary |
+|---|---:|
+| Event rows | 2,756,101 |
+| Unique visitors | 1,407,580 |
+| Unique items in events | 235,061 |
+| Event period | 2015-05-03 to 2015-09-18 |
+| Item property rows | 20,275,902 |
+| Category tree rows | 1,669 |
 
-## Dataset
+Event distribution:
 
-Publicly available e-commerce customer behavior dataset.
+| Event Type | Count |
+|---|---:|
+| view | 2,664,312 |
+| addtocart | 69,332 |
+| transaction | 22,457 |
 
-Possible variables:
+User-level funnel:
 
-- user_id
-- session_id
-- device_type
-- traffic_source
-- viewed_product
-- add_to_cart
-- purchased
-- purchase_amount
-- experiment_group (A / B)
+| Funnel Stage | Unique Visitors |
+|---|---:|
+| View | 1,404,179 |
+| Add to Cart | 37,722 |
+| Purchase | 11,719 |
 
----
+Approximate user-level conversion rates:
 
-## Methodology
-
-### 1. Data Preparation
-
-- Clean missing values
-- Validate experiment groups
-- Remove duplicate sessions
-- Define conversion events
-
-### 2. KPI Definition
-
-Primary metrics:
-
-- Conversion Rate
-- Add-to-Cart Rate
-- Average Order Value
-- Revenue per User
-
-### 3. Statistical Testing
-
-Methods may include:
-
-- Two-proportion z-test
-- Chi-square test
-- T-test
-- Confidence Interval Analysis
-
-### 4. Interpretation
-
-- Is the uplift statistically significant?
-- Is the business impact meaningful?
-- Should Group B be adopted?
+| Conversion Step | Rate |
+|---|---:|
+| View → Add to Cart | 2.69% |
+| Add to Cart → Purchase | 28.04% |
+| View → Purchase | 0.83% |
 
 ---
 
-## (Example) Output: Work In Progress...
+## 3. Key Analytical Direction
 
-| Metric | Group A | Group B | Result |
-|-------|--------|--------|--------|
-| Conversion Rate | 4.8% | 5.5% | +14.6% uplift |
-| Add-to-Cart Rate | 11.2% | 12.6% | Improved |
-| Revenue per User | $8.40 | $9.05 | Increased |
+The initial audit suggests that the largest conversion bottleneck occurs before users add products to cart.
 
----
+This means the highest-impact optimization opportunity may not be the checkout page, but the product discovery and product detail experience.
 
-## Tools Used
+Potential business hypotheses:
 
-- Python
-- Pandas
-- NumPy
-- SciPy / Statsmodels
-- Matplotlib / Seaborn
-- Jupyter Notebook
+- Product pages may not create enough purchase intent.
+- Some item categories may naturally convert better than others.
+- High traffic does not always mean high purchase conversion.
+- A/B tests should focus on cart-entry triggers and product page UX.
 
 ---
 
-## Key Takeaways
-
-This project highlights how experimentation can support smarter business decisions by replacing intuition with measurable evidence.
-
-A/B testing is one of the most practical ways to optimize user experience, improve conversion, and guide product or marketing strategy.
-
----
-
-## Folder Structure
+## 4. Project Structure
 
 ```text
-ecommerce_ab_test_project/
+ECOMMERCE_AB_TEST_PROJECT/
+├── app/
+│   └── streamlit_app.py
+│
 ├── data/
 │   ├── raw/
 │   └── processed/
+│
 ├── notebooks/
-│   └── ab_test_analysis.ipynb
+│   ├── 01_raw_data_audit.ipynb
+│   ├── 02_event_funnel_analysis.ipynb
+│   ├── 03_item_category_analysis.ipynb
+│   ├── 04_ab_test_design_simulation.ipynb
+│   └── 05_business_recommendation.ipynb
+│
 ├── outputs/
 │   ├── charts/
 │   └── tables/
+│
 ├── src/
 │   └── utils.py
+│
+├── .gitignore
 ├── README.md
 └── requirements.txt
 ```
 
 ---
 
-## Future Improvements
-- Segment-level experiment analysis
-- Mobile vs Desktop comparison
-- Traffic source performance analysis
-- Bayesian A/B testing
-- Sequential testing methods
+## 5. Analysis Workflow
+
+### 1. Raw Data Audit
+
+Notebook: `01_raw_data_audit.ipynb`
+
+Main tasks:
+
+- Validate row counts and schema
+- Check data types
+- Convert timestamps
+- Detect missing values
+- Detect duplicate rows
+- Summarize event distribution
+
+### 2. Funnel Analysis
+
+Notebook: `02_event_funnel_analysis.ipynb`
+
+Main tasks:
+
+- Define user funnel stages
+- Measure conversion rates
+- Analyze drop-off points
+- Time-series trend analysis
+
+### 3. Item & Category Analysis
+
+Notebook: `03_item_category_analysis.ipynb`
+
+Main tasks:
+
+- Merge behavioral logs with item categories
+- Compare item-level conversion
+- Identify high-performing categories
+- Detect underperforming segments
+
+### 4. A/B Test Design & Simulation
+
+Notebook: `04_ab_test_design_simulation.ipynb`
+
+Main tasks:
+
+- Define baseline conversion
+- Set uplift scenarios
+- Sample size estimation
+- Two-proportion z-test
+- Expected revenue impact simulation
+
+### 5. Business Recommendation
+
+Notebook: `05_business_recommendation.ipynb`
+
+Main tasks:
+
+- Summarize findings
+- Prioritize experiments
+- Recommend actionable growth strategies
 
 ---
 
-## Author
+## 6. Streamlit Dashboard
+
+The Streamlit dashboard is designed for business stakeholders.
+
+Planned pages:
+
+1. Executive Summary  
+2. Funnel Analysis  
+3. Item & Category Insights  
+4. A/B Test Simulation  
+5. Business Action Plan
+
+Run locally:
+
+```bash
+streamlit run app/streamlit_app.py
+```
+
+---
+
+## 7. Tech Stack
+
+- Python
+- pandas
+- NumPy
+- SciPy
+- Statsmodels
+- Matplotlib
+- Plotly
+- Streamlit
+- Jupyter Notebook
+- PyArrow
+- tqdm
+
+---
+
+## 8. Repository Policy
+
+Raw data files are excluded from the repository due to file size.
+
+Excluded paths:
+
+data/raw/  
+data/processed/  
+outputs/
+
+---
+
+## 9. Author
 
 Ji-Eun Son
-
-Business, Data & AI Portfolio Project
