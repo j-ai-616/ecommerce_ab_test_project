@@ -1,75 +1,187 @@
-# E-commerce Behavioral Analytics & A/B Test Simulation
-#### Identifying funnel drop-offs and improving purchase conversion through experiment design
+# E-commerce Behavioral Analytics & A/B Test Simulation  
+#### Turning behavioral log data into conversion growth strategies through funnel analytics and experiment design
 
-(*Work In Progress)
+[![Python](https://img.shields.io/badge/Python-3.12-blue.svg)]()
+[![Streamlit](https://img.shields.io/badge/Streamlit-App-red.svg)]()
+[![Status](https://img.shields.io/badge/Project-Completed-brightgreen.svg)]()
+
+### 🚀 Streamlit Dashboard: [Click Here to Explore the Live App](https://ecommerce-ab-test.streamlit.app/)
+
+---
 
 ## 1. Project Overview
 
-This project analyzes large-scale e-commerce behavioral log data to identify conversion bottlenecks and design an A/B test strategy for improving purchase conversion.
+This project analyzes large-scale e-commerce behavioral event log data to identify where users drop off in the purchase journey and how conversion can be improved through A/B testing.
 
-Rather than stopping at descriptive analytics, this project follows a practical business workflow:
+Rather than stopping at descriptive analytics, the project follows a practical product analytics workflow:
 
-> raw data audit → funnel analysis → item/category analysis → A/B test design → statistical simulation → business recommendation
+> **raw data audit → funnel diagnosis → item/category opportunity analysis → A/B test simulation → business action plan**
 
-The objective is to transform behavioral data into actionable product and growth strategies.
+The final goal is simple:
+
+> **Find where conversion is leaking, prioritize what to improve first, and design experiments with measurable business impact.**
 
 ---
 
-## 2. Raw Data Summary
+## 2. Why This Project Matters
 
-Initial raw data audit results:
+In e-commerce, even a small improvement in conversion rate can create significant business value.
 
-| Data | Summary |
+Examples:
+
+- Better CTA button wording
+- Improved product detail page layout
+- Stronger trust signals: reviews, delivery, returns
+- Better recommendation placement
+- Smarter exposure of high-converting categories
+
+Instead of relying on intuition, this project uses data to answer:
+
+> **Which change should be tested first?**
+
+---
+
+## 3. Core Findings
+
+### User-Level Funnel
+
+| Funnel Stage | Unique Users |
 |---|---:|
-| Event rows | 2,756,101 |
-| Unique visitors | 1,407,580 |
-| Unique items in events | 235,061 |
-| Event period | 2015-05-03 to 2015-09-18 |
-| Item property rows | 20,275,902 |
-| Category tree rows | 1,669 |
-
-Event distribution:
-
-| Event Type | Count |
-|---|---:|
-| view | 2,664,312 |
-| addtocart | 69,332 |
-| transaction | 22,457 |
-
-User-level funnel:
-
-| Funnel Stage | Unique Visitors |
-|---|---:|
-| View | 1,404,179 |
+| View Product | 1,404,179 |
 | Add to Cart | 37,722 |
 | Purchase | 11,719 |
 
-Approximate user-level conversion rates:
+### Conversion Rates
 
 | Conversion Step | Rate |
 |---|---:|
-| View → Add to Cart | 2.69% |
-| Add to Cart → Purchase | 28.04% |
-| View → Purchase | 0.83% |
+| View → Add to Cart | **2.69%** |
+| Add to Cart → Purchase | **28.04%** |
+| View → Purchase | **0.83%** |
+
+### Key Insight
+
+The largest conversion bottleneck occurs **before users add products to cart**.
+
+This means the first optimization priority is **not checkout**, but:
+
+- Product detail page UX
+- CTA button design / wording
+- Promotion messaging
+- Recommendation modules
+- Trust-building information
 
 ---
 
-## 3. Key Analytical Direction
+## 4. Final Business Action Plan
 
-The initial audit suggests that the largest conversion bottleneck occurs before users add products to cart.
+### Action 1. Optimize High-Traffic / Low-Conversion Categories
 
-This means the highest-impact optimization opportunity may not be the checkout page, but the product discovery and product detail experience.
+Target categories with many visitors but weak conversion.
 
-Potential business hypotheses:
+Recommended tests:
 
-- Product pages may not create enough purchase intent.
-- Some item categories may naturally convert better than others.
-- High traffic does not always mean high purchase conversion.
-- A/B tests should focus on cart-entry triggers and product page UX.
+- CTA redesign
+- Better price / benefit communication
+- Review visibility improvement
+- Shipping / return reassurance
+
+### Action 2. Expand Low-Traffic / High-Conversion Categories
+
+Some categories convert well but lack exposure.
+
+Recommended tests:
+
+- Recommendation slots
+- Search ranking boost
+- Homepage banner exposure
+- Promotional traffic allocation
+
+### Action 3. Measure the Right Metrics
+
+**Primary Metric**
+
+> View → Add to Cart Conversion Rate
+
+**Guardrail Metric**
+
+> View → Purchase Conversion Rate
 
 ---
 
-## 4. Project Structure
+## 5. Analytical Workflow
+
+### 01. Raw Data Audit
+
+Notebook: `01_raw_data_audit.ipynb`
+
+- Validate schema and row counts
+- Timestamp conversion
+- Missing values / duplicates
+- Event distribution audit
+
+### 02. Funnel Analysis
+
+Notebook: `02_event_funnel_analysis.ipynb`
+
+- User journey funnel definition
+- Step conversion rates
+- Drop-off diagnosis
+- Daily / monthly trends
+
+### 03. Item & Category Analysis
+
+Notebook: `03_item_category_analysis.ipynb`
+
+- Category mapping merge
+- High-performing categories
+- Opportunity matrix
+- Optimization vs expansion candidates
+
+### 04. A/B Test Design & Simulation
+
+Notebook: `04_ab_test_design_simulation.ipynb`
+
+- Baseline metric setup
+- Uplift scenarios
+- Sample size estimation
+- Two-proportion z-test
+- Monte Carlo simulation
+- Expected impact per 100K users
+
+### 05. Business Recommendation
+
+Notebook: `05_business_recommendation.ipynb`
+
+- Prioritized roadmap
+- Final experiment plan
+- Decision rules for rollout
+
+---
+
+## 6. Streamlit Dashboard
+
+An interactive dashboard was built for business stakeholders.
+
+### Main Pages
+
+1. Project Guide
+2. Executive Summary
+3. Funnel Analysis
+4. Item & Category Insights
+5. A/B Test Simulation
+6. Business Action Plan
+7. Data & Repository Notes
+
+### Run Locally
+
+```bash
+python -m streamlit run app/streamlit_app.py
+```
+
+---
+
+## 7. Project Structure
 
 ```text
 ECOMMERCE_AB_TEST_PROJECT/
@@ -94,95 +206,14 @@ ECOMMERCE_AB_TEST_PROJECT/
 ├── src/
 │   └── utils.py
 │
-├── .gitignore
 ├── README.md
-└── requirements.txt
+├── requirements.txt
+└── .gitignore
 ```
 
 ---
 
-## 5. Analysis Workflow
-
-### 1. Raw Data Audit
-
-Notebook: `01_raw_data_audit.ipynb`
-
-Main tasks:
-
-- Validate row counts and schema
-- Check data types
-- Convert timestamps
-- Detect missing values
-- Detect duplicate rows
-- Summarize event distribution
-
-### 2. Funnel Analysis
-
-Notebook: `02_event_funnel_analysis.ipynb`
-
-Main tasks:
-
-- Define user funnel stages
-- Measure conversion rates
-- Analyze drop-off points
-- Time-series trend analysis
-
-### 3. Item & Category Analysis
-
-Notebook: `03_item_category_analysis.ipynb`
-
-Main tasks:
-
-- Merge behavioral logs with item categories
-- Compare item-level conversion
-- Identify high-performing categories
-- Detect underperforming segments
-
-### 4. A/B Test Design & Simulation
-
-Notebook: `04_ab_test_design_simulation.ipynb`
-
-Main tasks:
-
-- Define baseline conversion
-- Set uplift scenarios
-- Sample size estimation
-- Two-proportion z-test
-- Expected revenue impact simulation
-
-### 5. Business Recommendation
-
-Notebook: `05_business_recommendation.ipynb`
-
-Main tasks:
-
-- Summarize findings
-- Prioritize experiments
-- Recommend actionable growth strategies
-
----
-
-## 6. Streamlit Dashboard
-
-The Streamlit dashboard is designed for business stakeholders.
-
-Planned pages:
-
-1. Executive Summary  
-2. Funnel Analysis  
-3. Item & Category Insights  
-4. A/B Test Simulation  
-5. Business Action Plan
-
-Run locally:
-
-```bash
-streamlit run app/streamlit_app.py
-```
-
----
-
-## 7. Tech Stack
+## 8. Tech Stack
 
 - Python
 - pandas
@@ -190,7 +221,6 @@ streamlit run app/streamlit_app.py
 - SciPy
 - Statsmodels
 - Matplotlib
-- Plotly
 - Streamlit
 - Jupyter Notebook
 - PyArrow
@@ -198,18 +228,20 @@ streamlit run app/streamlit_app.py
 
 ---
 
-## 8. Repository Policy
+## 9. Repository Policy
 
-Raw data files are excluded from the repository due to file size.
+Raw data files are excluded from GitHub due to file size.
 
 Excluded paths:
 
-data/raw/  
-data/processed/  
+```text
+data/raw/
+data/processed/
 outputs/
+```
 
 ---
 
-## 9. Author
+## 10. Author
 
-Ji-Eun Son
+**Ji-Eun Son**
